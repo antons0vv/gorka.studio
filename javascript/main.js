@@ -5,28 +5,34 @@ let animationTimeout;
 let isAnimating = false;
 const speed = 450;
 
-function showNextFrame() {
+function showNextFrame(shouldLoop = false) {
     if (frames.length === 0 || !ascii) return; // Safety check
     
     ascii.textContent = frames[i];
     i++;
-    
+        
     // Continue only if there are more frames to show and we're still animating
     if (i < frames.length && isAnimating) {
-        animationTimeout = setTimeout(showNextFrame, speed);
+        animationTimeout = setTimeout(() => showNextFrame(shouldLoop), speed);
     } else if (i >= frames.length) {
-        // Animation finished
-        isAnimating = false;
-        i = frames.length - 1; // Stay on last frame
+        if (shouldLoop && isAnimating) {
+            // Loop: restart from first frame
+            i = 0;
+            animationTimeout = setTimeout(() => showNextFrame(shouldLoop), speed);
+        } else {
+            // Animation finished
+            isAnimating = false;
+            i = frames.length - 1; // Stay on last frame
+        }
     }
 }
 
-function startAnimation() {
+function startAnimation(shouldLoop = false) {
     if (isAnimating) return; // Don't start if already animating
     
     isAnimating = true;
     i = 0; // Start from first frame
-    showNextFrame();
+    showNextFrame(shouldLoop);
 }
 
 function stopAnimation() {
@@ -50,14 +56,14 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
             frames = data.split('---FRAME---').map(f => f.trim());
             
-            // Play animation once on load
-            startAnimation();
+            // Play animation once on load (no loop)
+            startAnimation(false);
         });
     
     let animation = document.getElementById('ascii');
     
     animation.addEventListener('mouseenter', function() {
-        startAnimation();
+        startAnimation(true); // Loop on hover
     });
     
     animation.addEventListener('mouseleave', function() {
