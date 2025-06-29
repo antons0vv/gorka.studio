@@ -62,11 +62,30 @@ document.addEventListener('DOMContentLoaded', function () {
     
     let animation = document.getElementById('ascii');
 
+    fetch('./calendarpage.txt')
+        .then(response => response.text())
+        .then(text => {
+          document.getElementById('calendarpage').textContent = text;
+        });
+
+    fetch('./calendarpage_graphic.txt')
+        .then(response => response.text())
+        .then(text => {
+          document.getElementById('calendarpage_graphic').textContent = text;
+        });
+
     fetch('./aboutpage.txt')
         .then(response => response.text())
         .then(text => {
           document.getElementById('aboutpage').textContent = text;
         });
+
+    fetch('./storepage.txt')
+        .then(response => response.text())
+        .then(text => {
+          document.getElementById('storepage').textContent = text;
+        });
+
     
     animation.addEventListener('mouseenter', function() {
         startAnimation(true); // Loop on hover
