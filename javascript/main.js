@@ -61,6 +61,12 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     
     let animation = document.getElementById('ascii');
+
+    fetch('./aboutpage.txt')
+        .then(response => response.text())
+        .then(text => {
+          document.getElementById('aboutpage').textContent = text;
+        });
     
     animation.addEventListener('mouseenter', function() {
         startAnimation(true); // Loop on hover
@@ -69,4 +75,6 @@ document.addEventListener('DOMContentLoaded', function () {
     animation.addEventListener('mouseleave', function() {
         stopAnimation();
     });
+
+  
 });
