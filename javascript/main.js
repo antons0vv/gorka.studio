@@ -79,14 +79,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(text => {
           document.getElementById('aboutpage').textContent = text;
         });
-
-    fetch('./storepage.txt')
-        .then(response => response.text())
-        .then(text => {
-          document.getElementById('storepage').textContent = text;
-        });
-
-    
+   
     animation.addEventListener('mouseenter', function() {
         startAnimation(true); // Loop on hover
     });

@@ -5,6 +5,19 @@
     src: url('../font/ABCGaisyr.woff') format('woff');
 }
 
+button{
+    background-color: transparent;
+    border: none;
+    color: #000000;
+    font-family: 'ABCGaisyr';
+    font-size: 18px;
+    cursor: pointer;
+}
+
+button:hover {
+    text-decoration: line-through;
+}
+
 .text {
     font-family: 'ABCGaisyr';
     font-style: normal;
@@ -33,6 +46,10 @@
     align-items: center;
     height: 100dvh;
 }
+
+.store{
+    flex-direction: column;
+    gap: 72px;}
 
 .text-container {
     position: absolute;
